@@ -164,5 +164,8 @@ def missing_check(df):
                     'Numbers of Unique':unique_val,
                     'Data type':type_data})
   return df
+```
 
-![image](https://user-images.githubusercontent.com/88529383/164169342-17fddc02-fb04-4aab-8727-680bfa77cda8.png)
+## Success Criteria Model 
+The percentage of customers that can be predicted for acquisition is at least 50%.
+
