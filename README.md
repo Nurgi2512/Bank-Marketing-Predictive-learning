@@ -83,17 +83,38 @@ Some columns have outliers but this is normal because the outliers are values â€
 What is the distribution of the customers' ages? Which age group tends to have the highest likelihood of making deposits? <br>
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/a3b9fafc-ea39-4928-b64d-d750632c79f0)<br>
 The age distribution of the customers follows a normal distribution. <br>
-
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/4ae41664-c27a-4541-8a74-2531e3421a93)<br>
-By median, it appears that customers who make deposits are older compared to customers who do not deposit.
+By median, it appears that customers who make deposits are 30-50 years old compared to customers who do not deposit.<br>
 
 ### Analisis
-![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/5bc149ba-d40e-43eb-9bae-db4227d38b57)<br>
-Customers who make deposits tend to have a moderate balance or balances below 40000, with a frequency below 20.
+1. Is there a correlation between education level and balance?<br>
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/2b2ffbea-5e69-4c5d-b180-aa7c1c63a027)<br>
+The balance distribution appears random across different education levels, suggesting there may not be a correlation between balance and education level. <br>
+2. What is the correlation between education and deposits? <br>
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/ef2497fb-6b48-4267-8d84-dfea3b9d76cb) <br>
+There is a non-linear relationship between education level and the percentage of deposits. The deposit percentage tends to be high at the primary education level, then decreases at the lower and upper secondary education levels. However, it slightly increases again for customers with a bachelor's degree. <br>
+3. Is there a correlation between balance and deposit in English? <br>
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/469eef77-1871-41ab-96a8-31862c3c4587) <br>
+The relationship between balance categories and deposit is linear. Customers with a balance category of more than 40000 appear to be promising targets because they have a high deposit percentage, indicating an interesting behavioral pattern. <br>
+4. Is there a significant difference between marital status and the likelihood of a customer making a deposit? <br>
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/0dc61fcf-c77e-4e7d-b4f4-ee2fa2f80e84) <br>
+In terms of percentage, the deposit rate for customers with a marital status of "single" is higher than for customers who are "divorced" and "married". The deposit rate for "single" customers reaches 54%, while for "divorced" customers it reaches 48%, and for "married" customers it reaches 43%. <br>
+5. Does increasing the frequency of contact with customers during the campaign period increase the likelihood that the customer will open a deposit account? <br>
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/b69cc05a-98ae-43aa-a84b-e3a385d0426b) <br>
+In terms of percentage, the deposit rate for customers with a marital status of "single" is higher than for customers who are "divorced" and "married". The deposit rate for "single" customers reaches 54%, while for "divorced" customers it reaches 48%, and for "married" customers it reaches 43%.
+
+
+
+
+   
+
+
+
+
 
 ## Data Preprocessing
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/671e4293-9b68-4c75-92d3-a4938bb47bc7)<br>
-- Handling Multicolinearity <br>
+## Handling Multicolinearity
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/6d7f2891-6838-4f3c-8bbc-12637f5d66ed)<br>
 Using the heat map correlation method, features such as 'pdays', 'previous', and 'poutcome' exhibit high correlation. However, removing these features enhances the model's performance by reducing multicollinearity or overfitting issues. This reduces the complexity of the model and improves its predictive ability.<br>
 <img width="182" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/bf2987ca-cbb0-4001-b3f3-45903e402db2">
@@ -102,19 +123,22 @@ Using the heat map correlation method, features such as 'pdays', 'previous', and
 <img width="412" alt="image" <img width="358" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/7351c726-8890-4db3-adbc-254ec4948b40">
 
 ## Modelling
-![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/92ecc049-aa68-4ee4-8093-7b0a1d1439cf)
-Random Forest will be selected for tuning. Random Forest will be chosen for optimization.
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/92ecc049-aa68-4ee4-8093-7b0a1d1439cf)<br>
+Random Forest will be selected for tuning. Random Forest will be chosen for optimization.<br>
+## Evaluation For Data Test 
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/2cbec4a2-0497-407b-ae6c-711117084bfb) <br>
+In the evaluation of the test data, emphasis is placed on precision to assess the model's ability to identify customers who actually open a deposit account. This is crucial to prevent financial losses for the company due to prediction errors, which could lead to inefficient resource allocation and potential loss of profit opportunities.
 
 ## Factor Importance
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/78abe757-63cd-479f-9ca9-686e0dff4152)
 From the plot, 3 features with the most contribution are sos-con variables balance, day and month. 
 
 ## CUMULATIVE GAINS CURVE
-![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/7fc39342-3af0-4546-8314-91a7a6b91ffa)
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/7fc39342-3af0-4546-8314-91a7a6b91ffa)<br>
 Based on cumulative gains analysis, the model demonstrates good performance by successfully identifying 70% of customers who are likely to open a deposit account when focused on the top 20% of the population with the highest probability. Therefore, out of 10,000 customers, 2,000 customers are prioritized.
 
 ## LIFT CURVE
-![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/90640e9c-e197-4104-944d-cebac897e67b)
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/90640e9c-e197-4104-944d-cebac897e67b)<br>
 The model performs 1.4 times better than random choice on the top 20% of the population.
 
 
