@@ -1,28 +1,26 @@
 # Bank-Marketing-Predictive-learning
-The data is related to direct marketing campaign (phone calls) from a banking institution in Portugal. The classification goal is to predict whether the client will subscribe to a term deposit. The dataset can be found in the Bank Marketing Dataset. Alhamdulillah, this project serves as the Final Project guided by dibimbing.id, a data science bootcamp institution where I study.
+The data is related to direct marketing campaign (phone calls) from a banking institution in Portugal. The classification goal is to predict whether the client will subscribe to a term deposit. The dataset can be found in the Bank Marketing Dataset. Alhamdulillah, this project serves as the Final Project guided by dibimbing.id, a data science bootcamp institution where I study.<br>
 
-![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/a97e808a-bc4a-4477-8645-c4faede26d07) ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/470e667a-f14c-458a-a60e-79606aa60fc9)
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/a97e808a-bc4a-4477-8645-c4faede26d07) ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/470e667a-f14c-458a-a60e-79606aa60fc9)<br>
 
 In case you're not aware, the .ipynb file contains both the code and explanations, which you can easily view [here](https://colab.research.google.com/drive/1gtapjhRExtyk6_o1DPGDHajJFLYesTIv#scrollTo=Kw-KOGOPW51I). Additionally, as this was my final project in a Data Science Bootcamp, I've provided a Google Slide Presentation summarizing all the procedures and findings. You can access it [here](https://docs.google.com/presentation/d/1YEwvO8cq5_Bf9o2mhKgGUGlbcU6Pck50/edit?usp=sharing&ouid=116801621305292269028&rtpof=true&sd=true).
 
 ## Objectives 
-To be sure, banks can make money in a number of different ways, even if they are still essentially considered lenders. Generally, they make money by lending money to savers, who are then compensated with a certain interest rate and a guarantee of their funds. The borrowed money is then lent to the borrower who needs it at that time. However, the interest rate charged to borrowers is higher than the interest rate paid to depositors. The difference between the interest rate paid and the interest rate received is often called the spread, from which banks make a profit.
-
-The investigation focuses on a Portuguese banking institution that attempted to collect funds from depositors through a direct marketing campaign. Generally speaking, direct marketing campaigns require in-house or outsourced call centers. Although no information on cost of sales is provided, several articles note that this can significantly affect the cost-to-cost ratio of the product. In this case, the bank's sales team randomly contacted approximately 11,162 customers, so 52.6% of them (approximately 6540) were willing to make a deposit
-
+To be sure, banks can make money in a number of different ways, even if they are still essentially considered lenders. Generally, they make money by lending money to savers, who are then compensated with a certain interest rate and a guarantee of their funds. The borrowed money is then lent to the borrower who needs it at that time. However, the interest rate charged to borrowers is higher than the interest rate paid to depositors. The difference between the interest rate paid and the interest rate received is often called the spread, from which banks make a profit.<br>
+The investigation focuses on a Portuguese banking institution that attempted to collect funds from depositors through a direct marketing campaign. Generally speaking, direct marketing campaigns require in-house or outsourced call centers. Although no information on cost of sales is provided, several articles note that this can significantly affect the cost-to-cost ratio of the product. In this case, the bank's sales team randomly contacted approximately 11,162 customers, so 52.6% of them (approximately 6540) were willing to make a deposit. <br>
 However, the bank was looking for ways to help it run more effective marketing campaigns and improve conversion rates, and machine learning was one of the answers.
 
 ## Libraries
 Libraries such as [pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/), [matplotlib](https://matplotlib.org/), and [seaborn](https://seaborn.pydata.org/) are the most commonly used in the analysis. However, I also used [sklearn](https://scikit-learn.org/stable/) to conduct the predictive analysis with some classification models.
 ```python
-#======Pandas Config========
+======Pandas Config========
 import pandas as pd
 pd.set_option("display.max_columns",None)
 
-#=======Numpy=========
+=======Numpy=========
 import numpy as np
 
-#=======Visualization======
+=======Visualization======
 import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set(style='whitegrid')
@@ -30,13 +28,13 @@ sns.set_palette("bright")
 %matplotlib inline
 %config InlineBackend.figure_format = 'retina'
 
-#=======Preprocessing=======
+=======Preprocessing=======
 # for Q-Q plots
 import scipy.stats as stats
 from feature_engine.outliers import Winsorizer
 from scipy.stats import chi2_contingency
 
-#=========Modeling ===========
+=========Modeling ===========
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_validate, StratifiedKFold, RandomizedSearchCV, cross_val_score
 from sklearn import svm,tree
@@ -53,129 +51,20 @@ from sklearn.metrics import auc,roc_auc_score
 from sklearn.metrics import roc_auc_score, roc_curve, RocCurveDisplay, precision_recall_curve, PrecisionRecallDisplay
 from sklearn.model_selection import train_test_split as tts
 from sklearn import model_selection
-#=====Warnings========
+
+=====Warnings========
 import warnings
 warnings.filterwarnings("ignore")
-
-
-#======Function========
-def correlation_ratio(categories, measurements):
-    fcat, _ = pd.factorize(categories)
-    cat_num = np.max(fcat)+1
-    y_avg_array = np.zeros(cat_num)
-    n_array = np.zeros(cat_num)
-    for i in range(0,cat_num):
-        cat_measures = measurements[np.argwhere(fcat == i).flatten()]
-        n_array[i] = len(cat_measures)
-        y_avg_array[i] = np.average(cat_measures)
-    y_total_avg = np.sum(np.multiply(y_avg_array,n_array))/np.sum(n_array)
-    numerator = np.sum(np.multiply(n_array,np.power(np.subtract(y_avg_array,y_total_avg),2)))
-    denominator = np.sum(np.power(np.subtract(measurements,y_total_avg),2))
-    if numerator == 0:
-        eta = 0.0
-    else:
-        eta = np.sqrt(numerator/denominator)
-    return eta
-
-def cramers_v(x, y):
-    confusion_matrix = pd.crosstab(x,y)
-    chi2 = stats.chi2_contingency(confusion_matrix)[0]
-    n = confusion_matrix.sum().sum()
-    phi2 = chi2/n
-    r,k = confusion_matrix.shape
-    phi2corr = max(0, phi2-((k-1)*(r-1))/(n-1))
-    rcorr = r-((r-1)**2)/(n-1)
-    kcorr = k-((k-1)**2)/(n-1)
-    return np.sqrt(phi2corr/min((kcorr-1),(rcorr-1)))
-
-
-def create_stacked_bar_percent(df,column_name):
-
-    # Get the percentage of default by each group
-    default_by_group = pd.crosstab(index=df['deposit'],columns = df[column_name], normalize = 'columns')
-    default_by_group = default_by_group[default_by_group.iloc[1].sort_values().index]
-
-    # Round up to 2 decimal
-    default_by_group = default_by_group.apply(lambda x: round(x,2))
-
-    labels = default_by_group.columns
-    list1 = default_by_group.iloc[0].to_list()
-    list2 = default_by_group.iloc[1].to_list()
-
-    list1_name = "deposit"
-    list2_name = "Not Deposit"
-    title = f" %Deposit by {column_name}"
-    xlabel = column_name
-    ylabel = "Number of Deposit"
-
-    fig, ax = plt.subplots(figsize=(8,8),dpi=100)
-    bar_width = 0.5
-
-    ax1 = ax.bar(labels,list1, bar_width, label = list1_name)
-    ax2 = ax.bar(labels,list2, bar_width, bottom = list1, label = list2_name)
-
-    ax.set_title(title, fontweight = "bold",fontsize=12)
-    ax.set_xlabel(xlabel, fontweight = "bold",fontsize=12)
-    ax.set_ylabel(ylabel, fontweight = "bold",fontsize=12)
-    ax.legend(loc="upper right")
-
-    plt.xticks(list(range(len(labels))), labels,rotation=90)
-    plt.yticks(fontsize=12)
-
-    for r1, r2 in zip(ax1, ax2):
-        h1 = r1.get_height()
-        h2 = r2.get_height()
-        plt.text(r1.get_x() + r1.get_width() / 2., h1 / 2., f"{h1:.0%}", ha="center", va="center", color="black", fontsize=12, fontweight="bold")
-        plt.text(r2.get_x() + r2.get_width() / 2., h1 + h2 / 2., f"{h2:.0%}", ha="center", va="center", color="black", fontsize=12, fontweight="bold")
-
-    plt.show()
-
-def diagnostic_plots(df, variable):
-    # function takes a dataframe (df) and
-    # the variable of interest as arguments
-
-    # define figure size
-    plt.figure(figsize=(16, 4))
-
-    # histogram
-    plt.subplot(1, 3, 1)
-    sns.histplot(df[variable], bins=30)
-    plt.title('Histogram')
-
-    # Q-Q plot
-    plt.subplot(1, 3, 2)
-    stats.probplot(df[variable], dist="norm", plot=plt)
-    plt.ylabel('RM quantiles')
-
-    # boxplot
-    plt.subplot(1, 3, 3)
-    sns.boxplot(y=df[variable])
-    plt.title('Boxplot')
-
-    plt.show()
-
-def missing_check(df):
-  missing = df.isnull().sum()
-  missing_per = round(missing/len(df),4)*100
-  unique_val = df.nunique()
-  type_data = df.dtypes
-  df = pd.DataFrame({'Missing_values':missing,
-                    'Percent of Missing (%)':missing_per,
-                    'Numbers of Unique':unique_val,
-                    'Data type':type_data})
-  return df
 ```
 
 ## Success Criteria Model 
 The percentage of customers that can be predicted for acquisition is at least 50%.
 
 ## Definisi Model Dan Baseline Model
-
 - Definisi Model <br>
 Classifikasi customer potensial untuk di akuisisi berdasarkan demographics, spend dan engagement.<br>
 - Baseline Model <br>
-![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/3afffda6-52d4-4478-bf89-148d52ec5b9e)
-
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/3afffda6-52d4-4478-bf89-148d52ec5b9e) <br>
 There were 6540 customers who were acquired and 190 customers who refused to be acquired.
 
 ## Data Cleaning
@@ -185,32 +74,57 @@ There were 6540 customers who were acquired and 190 customers who refused to be 
 The data type for each column is appropriate and there is no missing data
 
 ## Check Ouliers
-<img width="583" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/beb4262c-ab68-487f-9623-c2f3988b7ae7">
-
-Observasi : <br>
-1. kolom yang memiliki outliers adalah age, balance, duration, campaign, pdays, previous <br>
-2. kolom age memiliki outliers karena usia nasabah maksimal nya adalah 95 tahun sehingga outliers disini adalah hal yang wajar<br>
-3. kolom balance memiliki outliers, kolom balance adalah kolom yang  mengacu pada saldo atau jumlah uang yang dimiliki oleh nasabah di rekening bank mereka. Ini adalah informasi tentang jumlah uang yang tersedia dalam rekening bank klien pada saat tertentu. Sehingga outliers disini adalah hal yang wajar<br>
-4. duration memiliki outliers, kolom duration mengacu pada durasi kontak terakhir antara bank dan nasabah selama campaign pemasaran. Durasi ini diukur dalam detik. Sehingga outliers disini adalah hal yang wajar<br>
-5. campaign memiliki outliers, kolom campaign mengacu pada jumlah kontak yang dilakukan selama campaign pemasaran tertentu untuk nasabah tertentu. Ini mencatat jumlah total kontak yang dilakukan oleh bank kepada nasabah yang bersangkutan, termasuk kontak terakhir yang dicatat dalam dataset ini. Sehingga outliers disini adalah hal yang wajar.<br>
-6. pdays memiliki outliers, kolom pdays mengacu pada jumlah hari yang berlalu sejak nasabah terakhir kali dihubungi dari campaign pemasaran sebelumnya. Atribut ini mencatat informasi tentang jangka waktu antara kontak pemasaran sebelumnya dengan kontak pemasaran saat ini.<br>
-Atribut pdays dapat memberikan wawasan tentang seberapa sering nasabah dihubungi dalam campaign pemasaran sebelumnya, apakah ada pola dalam interaksi sebelumnya yang dapat memengaruhi respons nasabah pada kontak pemasaran saat ini, serta apakah ada hubungan antara lamanya jeda antara kontak pemasaran sebelumnya dengan keputusan nasabah untuk berlangganan deposito berjangka. Sehingga outliers disini adalah hal yang wajar<br>
-7. previous memiliki outliers, kolom previous mengacu pada jumlah kontak yang dilakukan sebelum kampanye pemasaran saat ini untuk nasabah tertentu. Atribut ini mencatat jumlah total kontak yang telah dilakukan oleh bank kepada nasabah yang bersangkutan sebelum campaign pemasaran saat ini.<br>
-Informasi tentang jumlah kontak sebelumnya dapat memberikan wawasan tentang seberapa sering bank telah mencoba untuk menghubungi nasabah sebelumnya dalam upaya pemasaran.<br>
-Hal ini juga dapat memberikan gambaran tentang seberapa akrab atau terbiasa nasabah dengan kontak pemasaran dari bank tersebut. kolom previous dapat membantu dalam memahami seberapa efektif campaign pemasaran sebelumnya, serta pola perilaku klien dalam menanggapi atau merespons kontak pemasaran dari bank. Informasi ini dapat digunakan untuk menyusun strategi pemasaran yang lebih efektif di masa depan. Sehingga outliers disini adalah hal yang wajar.
+<img width="583" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/beb4262c-ab68-487f-9623-c2f3988b7ae7"> <br>
+Some columns have outliers but this is normal because the outliers are values ​​that are considered normal, such as age and also the number of times the bank contacted the customer.
 
 ## Eksplonatory Data Analysis
 
-### Distribusi Data
-Seperti apa distribusi usia para nasabah? Usia manakah yang cenderung memiliki kemungkinan deposit terbesar?
+### Data Distribution
+What is the distribution of the customers' ages? Which age group tends to have the highest likelihood of making deposits? <br>
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/a3b9fafc-ea39-4928-b64d-d750632c79f0)<br>
+The age distribution of the customers follows a normal distribution. <br>
 
-![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/a3b9fafc-ea39-4928-b64d-d750632c79f0)
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/4ae41664-c27a-4541-8a74-2531e3421a93)<br>
+By median, it appears that customers who make deposits are older compared to customers who do not deposit.
 
-distribusi umur dari customer merupakan distribusi yang normal
+### Analisis
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/5bc149ba-d40e-43eb-9bae-db4227d38b57)<br>
+Customers who make deposits tend to have a moderate balance or balances below 40000, with a frequency below 20.
 
-![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/4ae41664-c27a-4541-8a74-2531e3421a93)
+## Data Preprocessing
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/671e4293-9b68-4c75-92d3-a4938bb47bc7)<br>
+- Handling Multicolinearity <br>
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/6d7f2891-6838-4f3c-8bbc-12637f5d66ed)<br>
+Using the heat map correlation method, features such as 'pdays', 'previous', and 'poutcome' exhibit high correlation. However, removing these features enhances the model's performance by reducing multicollinearity or overfitting issues. This reduces the complexity of the model and improves its predictive ability.<br>
+<img width="182" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/bf2987ca-cbb0-4001-b3f3-45903e402db2">
+<img width="185" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/cf113a06-3f2d-4c8d-8875-f6bf37ae0aaf">
+<img width="413" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/7b1d288a-b481-43a2-b4ba-0e1550219945">
+<img width="412" alt="image" <img width="358" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/7351c726-8890-4db3-adbc-254ec4948b40">
 
-secara median terlihat bahwa umur customer yang deposit adalah usia lebih tua dibandingkan customer yang tidak deposit
+## Modelling
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/92ecc049-aa68-4ee4-8093-7b0a1d1439cf)
+Random Forest will be selected for tuning. Random Forest will be chosen for optimization.
+
+## Factor Importance
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/78abe757-63cd-479f-9ca9-686e0dff4152)
+From the plot, 3 features with the most contribution are sos-con variables balance, day and month. 
+
+## CUMULATIVE GAINS CURVE
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/7fc39342-3af0-4546-8314-91a7a6b91ffa)
+Based on cumulative gains analysis, the model shows good performance as it successfully identifies 70% of customers who will open a deposit account by focusing on the top 20% of the population with the highest probability.
+
+## LIFT CURVE
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/aecdf849-20e2-4424-ba73-b6ab71e2c5e3)
+The model performs 1.4 times better than random choice on the top 20% of the population.
+
+
+
+
+
+
+
+
+
 
 
 
