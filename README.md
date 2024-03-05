@@ -86,7 +86,7 @@ The age distribution of the customers follows a normal distribution. <br>
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/4ae41664-c27a-4541-8a74-2531e3421a93)<br>
 By median, it appears that customers who make deposits are 30-50 years old compared to customers who do not deposit.<br>
 
-### Analisis
+### Analysis
 1. Is there a correlation between education level and balance?<br>
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/2b2ffbea-5e69-4c5d-b180-aa7c1c63a027)<br>
 The balance distribution appears random across different education levels, suggesting there may not be a correlation between balance and education level. <br>
@@ -102,15 +102,12 @@ In terms of percentage, the deposit rate for customers with a marital status of 
 5. Does increasing the frequency of contact with customers during the campaign period increase the likelihood that the customer will open a deposit account? <br>
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/b69cc05a-98ae-43aa-a84b-e3a385d0426b) <br>
 In terms of percentage, the deposit rate for customers with a marital status of "single" is higher than for customers who are "divorced" and "married". The deposit rate for "single" customers reaches 54%, while for "divorced" customers it reaches 48%, and for "married" customers it reaches 43%.
-
-
-
-
-   
-
-
-
-
+6. Does increasing the frequency of contact with customers during the campaign period increase the likelihood that the customer will open a deposit account? (contact frequency) <br>
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/8067c6c3-1ff7-421b-8f92-2aded1027a44) <br>
+It appears that the more frequently customers interact with the bank, the higher the percentage of customers who open deposit accounts. The percentage of deposit account openings significantly increases when the number of interactions exceeds 30 times contacting the customer. <br>
+7. Does the length of time since the last contact with the customer affect the customer's decision to open a deposit account? (time since last contact) <br>
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/f17451cd-59cd-4265-b4b8-1dab3ccdd3fa) <br>
+Within the time frame of 15 to 21 days before the last contact, there is a significant increase in the number of deposit accounts opened by customers. This suggests that interactions conducted during this period likely have a positive influence on the customer's decision to open a deposit account.
 
 ## Data Preprocessing
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/671e4293-9b68-4c75-92d3-a4938bb47bc7)<br>
