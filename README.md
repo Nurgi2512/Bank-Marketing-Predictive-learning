@@ -62,7 +62,7 @@ The percentage of customers that can be predicted for acquisition is at least 50
 
 ## Model Definition Dan Baseline Model
 - Definisi Model <br>
-Classifikasi customer potensial untuk di akuisisi berdasarkan demographics, spend dan engagement.<br>
+Classifying potential customers for acquisition based on bank client data, related with the last contact of the current campaign, campaign. <br>
 - Baseline Model <br>
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/3afffda6-52d4-4478-bf89-148d52ec5b9e) <br>
 There were 5871 customers who were acquired and 5291 customers who refused to be acquired.
