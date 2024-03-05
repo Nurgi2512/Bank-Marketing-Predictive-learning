@@ -114,8 +114,10 @@ From the plot, 3 features with the most contribution are sos-con variables balan
 Based on cumulative gains analysis, the model shows good performance as it successfully identifies 70% of customers who will open a deposit account by focusing on the top 20% of the population with the highest probability.
 
 ## LIFT CURVE
-![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/aecdf849-20e2-4424-ba73-b6ab71e2c5e3)
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/90640e9c-e197-4104-944d-cebac897e67b)
 The model performs 1.4 times better than random choice on the top 20% of the population.
+
+
 
 
 
