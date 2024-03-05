@@ -8,7 +8,7 @@ In case you're not aware, the .ipynb file contains both the code and explanation
 ## Objectives 
 To be sure, banks can make money in a number of different ways, even if they are still essentially considered lenders. Generally, they make money by lending money to savers, who are then compensated with a certain interest rate and a guarantee of their funds. The borrowed money is then lent to the borrower who needs it at that time. However, the interest rate charged to borrowers is higher than the interest rate paid to depositors. The difference between the interest rate paid and the interest rate received is often called the spread, from which banks make a profit.
 
-The investigation focuses on a Portuguese banking institution that attempted to collect funds from depositors through a direct marketing campaign. Generally speaking, direct marketing campaigns require in-house or outsourced call centers. Although no information on cost of sales is provided, several articles note that this can significantly affect the cost-to-cost ratio of the product. In this case, the bank's sales team randomly contacted approximately 11,000 customers, so 52.6% of them (approximately 5,800) were willing to make a deposit
+The investigation focuses on a Portuguese banking institution that attempted to collect funds from depositors through a direct marketing campaign. Generally speaking, direct marketing campaigns require in-house or outsourced call centers. Although no information on cost of sales is provided, several articles note that this can significantly affect the cost-to-cost ratio of the product. In this case, the bank's sales team randomly contacted approximately 11,162 customers, so 52.6% of them (approximately 6540) were willing to make a deposit
 
 However, the bank was looking for ways to help it run more effective marketing campaigns and improve conversion rates, and machine learning was one of the answers.
 
@@ -174,6 +174,44 @@ The percentage of customers that can be predicted for acquisition is at least 50
 - Definisi Model <br>
 Classifikasi customer potensial untuk di akuisisi berdasarkan demographics, spend dan engagement.<br>
 - Baseline Model <br>
-![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/8660b40e-13bb-4767-a0c7-051adeaa5fda)
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/3afffda6-52d4-4478-bf89-148d52ec5b9e)
+
+There were 6540 customers who were acquired and 190 customers who refused to be acquired.
+
+## Data Cleaning
+- Check Missing Value <br>
+<img width="248" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/89b99037-4864-45d9-b631-196cba2d9acb">
+
+The data type for each column is appropriate and there is no missing data
+
+## Check Ouliers
+<img width="583" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/beb4262c-ab68-487f-9623-c2f3988b7ae7">
+
+Observasi : <br>
+1. kolom yang memiliki outliers adalah age, balance, duration, campaign, pdays, previous <br>
+2. kolom age memiliki outliers karena usia nasabah maksimal nya adalah 95 tahun sehingga outliers disini adalah hal yang wajar<br>
+3. kolom balance memiliki outliers, kolom balance adalah kolom yang  mengacu pada saldo atau jumlah uang yang dimiliki oleh nasabah di rekening bank mereka. Ini adalah informasi tentang jumlah uang yang tersedia dalam rekening bank klien pada saat tertentu. Sehingga outliers disini adalah hal yang wajar<br>
+4. duration memiliki outliers, kolom duration mengacu pada durasi kontak terakhir antara bank dan nasabah selama campaign pemasaran. Durasi ini diukur dalam detik. Sehingga outliers disini adalah hal yang wajar<br>
+5. campaign memiliki outliers, kolom campaign mengacu pada jumlah kontak yang dilakukan selama campaign pemasaran tertentu untuk nasabah tertentu. Ini mencatat jumlah total kontak yang dilakukan oleh bank kepada nasabah yang bersangkutan, termasuk kontak terakhir yang dicatat dalam dataset ini. Sehingga outliers disini adalah hal yang wajar.<br>
+6. pdays memiliki outliers, kolom pdays mengacu pada jumlah hari yang berlalu sejak nasabah terakhir kali dihubungi dari campaign pemasaran sebelumnya. Atribut ini mencatat informasi tentang jangka waktu antara kontak pemasaran sebelumnya dengan kontak pemasaran saat ini.<br>
+Atribut pdays dapat memberikan wawasan tentang seberapa sering nasabah dihubungi dalam campaign pemasaran sebelumnya, apakah ada pola dalam interaksi sebelumnya yang dapat memengaruhi respons nasabah pada kontak pemasaran saat ini, serta apakah ada hubungan antara lamanya jeda antara kontak pemasaran sebelumnya dengan keputusan nasabah untuk berlangganan deposito berjangka. Sehingga outliers disini adalah hal yang wajar<br>
+7. previous memiliki outliers, kolom previous mengacu pada jumlah kontak yang dilakukan sebelum kampanye pemasaran saat ini untuk nasabah tertentu. Atribut ini mencatat jumlah total kontak yang telah dilakukan oleh bank kepada nasabah yang bersangkutan sebelum campaign pemasaran saat ini.<br>
+Informasi tentang jumlah kontak sebelumnya dapat memberikan wawasan tentang seberapa sering bank telah mencoba untuk menghubungi nasabah sebelumnya dalam upaya pemasaran.<br>
+Hal ini juga dapat memberikan gambaran tentang seberapa akrab atau terbiasa nasabah dengan kontak pemasaran dari bank tersebut. kolom previous dapat membantu dalam memahami seberapa efektif campaign pemasaran sebelumnya, serta pola perilaku klien dalam menanggapi atau merespons kontak pemasaran dari bank. Informasi ini dapat digunakan untuk menyusun strategi pemasaran yang lebih efektif di masa depan. Sehingga outliers disini adalah hal yang wajar.
+
+## Eksplonatory Data Analysis
+
+### Distribusi Data
+Seperti apa distribusi usia para nasabah? Usia manakah yang cenderung memiliki kemungkinan deposit terbesar?
+
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/a3b9fafc-ea39-4928-b64d-d750632c79f0)
+
+distribusi umur dari customer merupakan distribusi yang normal
+
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/4ae41664-c27a-4541-8a74-2531e3421a93)
+
+secara median terlihat bahwa umur customer yang deposit adalah usia lebih tua dibandingkan customer yang tidak deposit
+
+
 
 
