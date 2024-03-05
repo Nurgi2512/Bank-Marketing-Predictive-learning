@@ -65,7 +65,7 @@ The percentage of customers that can be predicted for acquisition is at least 50
 Classifikasi customer potensial untuk di akuisisi berdasarkan demographics, spend dan engagement.<br>
 - Baseline Model <br>
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/3afffda6-52d4-4478-bf89-148d52ec5b9e) <br>
-There were 6540 customers who were acquired and 190 customers who refused to be acquired.
+There were 5871 customers who were acquired and 5291 customers who refused to be acquired.
 
 ## Data Cleaning
 - Check Missing Value <br>
@@ -111,7 +111,7 @@ From the plot, 3 features with the most contribution are sos-con variables balan
 
 ## CUMULATIVE GAINS CURVE
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/7fc39342-3af0-4546-8314-91a7a6b91ffa)
-Based on cumulative gains analysis, the model shows good performance as it successfully identifies 70% of customers who will open a deposit account by focusing on the top 20% of the population with the highest probability.
+Based on cumulative gains analysis, the model demonstrates good performance by successfully identifying 70% of customers who are likely to open a deposit account when focused on the top 20% of the population with the highest probability. Therefore, out of 10,000 customers, 2,000 customers are prioritized.
 
 ## LIFT CURVE
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/90640e9c-e197-4104-944d-cebac897e67b)
