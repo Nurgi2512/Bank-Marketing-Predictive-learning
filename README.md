@@ -60,7 +60,7 @@ warnings.filterwarnings("ignore")
 ## Success Criteria Model 
 The percentage of customers that can be predicted for acquisition is at least 50%.
 
-## Definisi Model Dan Baseline Model
+## Model Definition Dan Baseline Model
 - Definisi Model <br>
 Classifikasi customer potensial untuk di akuisisi berdasarkan demographics, spend dan engagement.<br>
 - Baseline Model <br>
@@ -73,7 +73,7 @@ There were 5871 customers who were acquired and 5291 customers who refused to be
 
 The data type for each column is appropriate and there is no missing data
 
-## Check Ouliers
+## Check Outliers
 <img width="583" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/beb4262c-ab68-487f-9623-c2f3988b7ae7"> <br>
 Some columns have outliers but this is normal because the outliers are values ​​that are considered normal, such as age and also the number of times the bank contacted the customer.
 
