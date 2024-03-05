@@ -7,6 +7,7 @@ In case you're not aware, the .ipynb file contains both the code and explanation
 
 ## Objectives 
 To be sure, banks can make money in a number of different ways, even if they are still essentially considered lenders. Generally, they make money by lending money to savers, who are then compensated with a certain interest rate and a guarantee of their funds. The borrowed money is then lent to the borrower who needs it at that time. However, the interest rate charged to borrowers is higher than the interest rate paid to depositors. The difference between the interest rate paid and the interest rate received is often called the spread, from which banks make a profit.<br>
+
 The investigation focuses on a Portuguese banking institution that attempted to collect funds from depositors through a direct marketing campaign. Generally speaking, direct marketing campaigns require in-house or outsourced call centers. Although no information on cost of sales is provided, several articles note that this can significantly affect the cost-to-cost ratio of the product. In this case, the bank's sales team randomly contacted approximately 11,162 customers, so 52.6% of them (approximately 6540) were willing to make a deposit. <br>
 However, the bank was looking for ways to help it run more effective marketing campaigns and improve conversion rates, and machine learning was one of the answers.
 
@@ -114,14 +115,16 @@ Within the time frame of 15 to 21 days before the last contact, there is a signi
 ## Handling Multicolinearity
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/6d7f2891-6838-4f3c-8bbc-12637f5d66ed)<br>
 Using the heat map correlation method, features such as 'pdays', 'previous', and 'poutcome' exhibit high correlation. However, removing these features enhances the model's performance by reducing multicollinearity or overfitting issues. This reduces the complexity of the model and improves its predictive ability.<br>
+## Mapping to convert categorical values to numerical values:
 <img width="182" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/bf2987ca-cbb0-4001-b3f3-45903e402db2">
 <img width="185" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/cf113a06-3f2d-4c8d-8875-f6bf37ae0aaf">
 <img width="413" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/7b1d288a-b481-43a2-b4ba-0e1550219945">
-<img width="412" alt="image" <img width="358" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/7351c726-8890-4db3-adbc-254ec4948b40">
+<img width="358" alt="image" src="https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/7351c726-8890-4db3-adbc-254ec4948b40">
 
 ## Modelling
-![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/92ecc049-aa68-4ee4-8093-7b0a1d1439cf)<br>
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/b6274709-a0c3-4196-85c3-05cde7022903) <br>
 Random Forest will be selected for tuning. Random Forest will be chosen for optimization.<br>
+
 ## Evaluation For Data Test 
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/2cbec4a2-0497-407b-ae6c-711117084bfb) <br>
 In the evaluation of the test data, emphasis is placed on precision to assess the model's ability to identify customers who actually open a deposit account. This is crucial to prevent financial losses for the company due to prediction errors, which could lead to inefficient resource allocation and potential loss of profit opportunities.
@@ -138,7 +141,19 @@ Based on cumulative gains analysis, the model demonstrates good performance by s
 ![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/90640e9c-e197-4104-944d-cebac897e67b)<br>
 The model performs 1.4 times better than random choice on the top 20% of the population.
 
+### SUMMARY
+- The Random Forest model was selected as the best because it had the highest accuracy compared to other models.
+- Therefore, it was chosen for adjustment (tuning). Thus, by using a model that is more sensitive to potential depositors, marketing campaigns can be optimized by approaching individuals who meet these criteria using various appropriate marketing strategies.
+- Additionally, the model's performance was evaluated through cumulative gain analysis and lift curve.
+- There are outliers in this dataset, which are considered normal as their values correspond to the respective column.
 
+### Recommendations
+- Age-Based Segmentation: Utilize age segmentation (30-50 years old) as the primary target for deposit promotions, as they are more likely to have deposit accounts.
+- Deeper Analysis on Balance and Education: Conduct further analysis to understand the relationship between customer balances and education levels. This can help determine if there are other factors influencing this pattern.
+- Targeting Based on Education Level: Although there is no direct relationship between balance and education, note that customers with primary education have a high percentage of deposits. Use this information to tailor marketing strategies and product offerings.
+- Focus on Customers with High Balances: Prioritize deposit promotions to customers with balances above 40,000, as they tend to have the highest deposits.
+- Target Single Women: Since single women have a high percentage of deposits, make them the primary target for deposit promotions.
+- Intensive Interaction to Increase Conversion: Increase the frequency of interactions with customers who have high potential to open deposits, especially those who have been contacted more than 30 times.
 
 
 
