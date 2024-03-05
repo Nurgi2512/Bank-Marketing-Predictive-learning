@@ -169,3 +169,11 @@ def missing_check(df):
 ## Success Criteria Model 
 The percentage of customers that can be predicted for acquisition is at least 50%.
 
+## Definisi Model Dan Baseline Model
+
+- Definisi Model <br>
+Classifikasi customer potensial untuk di akuisisi berdasarkan demographics, spend dan engagement.<br>
+- Baseline Model <br>
+![image](https://github.com/Nurgi2512/Bank-Marketing-Predictive-learning/assets/147684817/8660b40e-13bb-4767-a0c7-051adeaa5fda)
+
+
